@@ -2,12 +2,15 @@ terraform {
   required_providers {
     clumio = {
       source  = "clumio-code/clumio"
-      version = "~>0.11.0"
+      version = "0.14.0"
     }
-    aws = {}
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 6.0"
+    }
   }
-}
-
+} 
+  
 # Instantiate the Clumio provider
 provider "clumio" {
   clumio_api_token    = var.clumio_api_token
