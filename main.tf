@@ -7,7 +7,13 @@ provider "aws" {
     }
   }
 }
-
+terraform {
+  backend "s3" {
+    bucket         = "jr-tfstate"
+    key            = "~/code/clumio-connect/terraform.tfstate"
+    region         = "us-east-2"  
+  }
+}
 # Retrieve the effective AWS account ID and region
 data aws_caller_identity current {}
 data aws_region current {}
@@ -18,7 +24,6 @@ resource "clumio_aws_connection" "connection" {
   aws_region        = data.aws_region.current.name
   description       = "My Clumio Connection"
 }
-
 # Install the Clumio AWS template onto the registered connection
 module "clumio_protect" {
   providers = {
